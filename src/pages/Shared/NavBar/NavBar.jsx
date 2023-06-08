@@ -1,15 +1,27 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../Provider/AuthProvider";
 
 const NavBar = () => {
 
-    // TODO : user harkcore
-    const user = ''
+    const { user, logOut } = useContext(AuthContext);
+
+    const handleLogOut = () => {
+        logOut()
+            .then(() => {
+            }).catch((err) => {
+                alert("User Logout error ", err.message)
+            });
+    }
 
     const navLinkItems = <>
         <li><Link to="/">Home</Link></li>
         <li><Link to="instructors">Instructors</Link></li>
         <li><Link to="classes">Classes</Link></li>
-        {user && <li><Link to="dashboard">Dashboard</Link></li>}
+        {user && <>
+            <li><Link to="dashboard">Dashboard</Link></li>
+            <li><Link onClick={handleLogOut}>LogOut</Link></li>
+        </>}
     </>
 
     return (
@@ -32,7 +44,7 @@ const NavBar = () => {
             </div>
             <div className="navbar-end md:w-fit md:pl-4">
                 {user ?
-                    <Link to={`my-profile`} ><img className="w-12 h-12 rounded-full" src={'https://images.ctfassets.net/lh3zuq09vnm2/yBDals8aU8RWtb0xLnPkI/19b391bda8f43e16e64d40b55561e5cd/How_tracking_user_behavior_on_your_website_can_improve_customer_experience.png'} alt="" /></Link>
+                    <Link to={`my-profile`} ><img className="w-12 h-12 rounded-full" src={user?.photoURL} alt="" /></Link>
                     :
                     <Link to="/login" className="btn btn-accent text-white normal-case">Login</Link>
                 }

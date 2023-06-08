@@ -1,8 +1,11 @@
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import GoogleLogin from "../../Shared/Social/GoogleLogin";
+import { useContext } from "react";
+import { AuthContext } from "../../../Provider/AuthProvider";
 
 const Resister = () => {
+    const { createUser, setUser, updateUserProfile } = useContext(AuthContext)
 
     const { register, handleSubmit, formState: { errors } } = useForm();
 
@@ -10,7 +13,22 @@ const Resister = () => {
         if (data.password !== data.confrimPassword) {
             return alert('password not mash')
         }
-        console.log(data);
+
+        createUser(data.email, data.password)
+            .then(res => {
+                console.log(res.user);
+                setUser(res.user)
+                updateUserProfile(res.user, data.name, data.photo)
+                    .then(() => {
+                    })
+                    .catch((err) => {
+                        alert("Opps fall update Profile : ", err.message)
+                    });
+            })
+            .catch((err) => {
+                alert("Opps ", err.message)
+            });
+
     }
 
     return (
@@ -39,7 +57,7 @@ const Resister = () => {
                         <input type="email" placeholder="your email"
                             {...register("email", { required: true })}
                             name="email" className="input input-bordered w-full" />
-                        {errors.name &&
+                        {errors.email &&
                             <label className="label">
                                 <span className="label-text-alt text-red-700">Email is required</span>
                             </label>
@@ -51,11 +69,21 @@ const Resister = () => {
                             <span className="label-text">Password*</span>
                         </label>
                         <input type="password" placeholder="your password"
-                            {...register("password", { required: true })}
+                            {...register("password", { minLength: 6, maxLength: 15, required: true })}
                             name="password" className="input input-bordered w-full" />
-                        {errors.name &&
+                        {errors.password?.type === "required" &&
                             <label className="label">
                                 <span className="label-text-alt text-red-700">Password is required</span>
+                            </label>
+                        }
+                        {errors.password?.type === "minLength" &&
+                            <label className="label">
+                                <span className="label-text-alt text-red-700">Password is must be 6 characters</span>
+                            </label>
+                        }
+                        {errors.password?.type === "maxLength" &&
+                            <label className="label">
+                                <span className="label-text-alt text-red-700">Password is less than 15 characters</span>
                             </label>
                         }
                     </div>
@@ -65,11 +93,21 @@ const Resister = () => {
                             <span className="label-text">Confrim Password*</span>
                         </label>
                         <input type="password" placeholder="your Confrim password"
-                            {...register("confrimPassword", { required: true })}
+                            {...register("confrimPassword", { minLength: 6, maxLength: 15, required: true })}
                             name="confrimPassword" className="input input-bordered w-full" />
-                        {errors.name &&
+                        {errors.confrimPassword?.type === "required" &&
                             <label className="label">
                                 <span className="label-text-alt text-red-700">Confrim Password is required</span>
+                            </label>
+                        }
+                        {errors.confrimPassword?.type === "minLength" &&
+                            <label className="label">
+                                <span className="label-text-alt text-red-700">Confrim Password must be 6 characters</span>
+                            </label>
+                        }
+                        {errors.confrimPassword?.type === "maxLength" &&
+                            <label className="label">
+                                <span className="label-text-alt text-red-700">Confrim Password is less than 15 characters</span>
                             </label>
                         }
                     </div>
@@ -81,13 +119,12 @@ const Resister = () => {
                         <input type="text" placeholder="your photo"
                             {...register("photo", { required: true })}
                             name="photo" className="input input-bordered w-full" />
-                        {errors.name &&
+                        {errors.photo &&
                             <label className="label">
                                 <span className="label-text-alt text-red-700">Photo is required</span>
                             </label>
                         }
                     </div>
-
 
                     <div className="form-control w-full my-4">
                         <input type="submit" className="btn btn-primary" value="Sing Up" />

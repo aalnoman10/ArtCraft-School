@@ -2,15 +2,24 @@ import { useForm } from "react-hook-form";
 import GoogleLogin from "../../Shared/Social/GoogleLogin";
 import { Link } from "react-router-dom";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../../Provider/AuthProvider";
 
 const Login = () => {
+
+    const { login, setUser } = useContext(AuthContext)
+
     const [passwordHide, setPasswordHide] = useState(true)
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     const onSubmit = data => {
-
-        console.log(data);
+        login(data.email, data.password)
+            .then(res => {
+                console.log(res.user);
+                setUser(res.user)
+            }).catch((err) => {
+                alert("Opps ", err.message)
+            });
     }
 
     return (
