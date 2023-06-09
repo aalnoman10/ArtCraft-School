@@ -6,6 +6,8 @@ import Resister from "../pages/Login/Resister/Resister";
 import Error from "../Layout/Error";
 import Instructors from "../pages/Instructors/Instructors";
 import Classes from "../pages/Classes/Classes";
+import Dashboard from "../Layout/Dashboard";
+import PrivateRoute from "./PrivateRoute";
 
 const Router = createBrowserRouter([
     {
@@ -32,6 +34,12 @@ const Router = createBrowserRouter([
                 path: '/classes',
                 element: <Classes />
             },
+        ]
+    },
+    {
+        path: '/dashboard',
+        element: <PrivateRoute><Dashboard /></PrivateRoute>,
+        children: [
             {
                 path: '/dashboard',
                 element: <Home />
