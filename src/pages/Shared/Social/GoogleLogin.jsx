@@ -9,6 +9,25 @@ const GoogleLogin = () => {
         googleLogin()
             .then((res) => {
                 setUser(res.user);
+
+                // crete user
+                const newUser = {
+                    name: res.user.displayName,
+                    email: res.user.email
+                }
+
+                fetch("http://localhost:5000/users", {
+                    method: "POST",
+                    headers: {
+                        "content-type": "application/json"
+                    },
+                    body: JSON.stringify(newUser)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data);
+                    })
+
             }).catch((err) => {
                 alert("Opps ", err.message);
             });

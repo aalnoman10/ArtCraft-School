@@ -18,6 +18,26 @@ const Resister = () => {
             .then(res => {
                 console.log(res.user);
                 setUser(res.user)
+
+                // crete user
+                const newUser = {
+                    name: data.name,
+                    email: data.email
+                }
+
+                fetch("http://localhost:5000/users", {
+                    method: "POST",
+                    headers: {
+                        "content-type": "application/json"
+                    },
+                    body: JSON.stringify(newUser)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data);
+                    })
+
+                // update profile
                 updateUserProfile(res.user, data.name, data.photo)
                     .then(() => {
                     })
