@@ -1,14 +1,39 @@
 import { useQuery } from "@tanstack/react-query";
+import { MdIntegrationInstructions } from "react-icons/md";
+import { GrUserAdmin } from "react-icons/gr";
 
 const ManageUsers = () => {
 
-    const { data: users = [] } = useQuery({
+    const { refetch, data: users = [] } = useQuery({
         queryKey: ['users'],
         queryFn: async () =>
-            await fetch('/user.json').then(
+            await fetch('http://localhost:5000/users').then(
                 (res) => res.json()
             ),
     })
+
+    const handleUserStatus = (_id, status) => {
+        const makeSure = confirm(`are you sure this user will be ${status}`)
+
+        if (makeSure) {
+            fetch(`http://localhost:5000/users/${_id}`, {
+                method: "PATCH",
+                headers: {
+                    "content-type": "application/json"
+                },
+                body: JSON.stringify({ status })
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.modifiedCount > 0) {
+                        alert(`user has ${status} successfull`)
+                        refetch()
+                    } else {
+                        alert("user status is not update")
+                    }
+                })
+        }
+    }
 
     return (
         <div>
@@ -32,10 +57,9 @@ const ManageUsers = () => {
                             <td>{index + 1}</td>
                             <td>{user.name}</td>
                             <td>{user.email}</td>
-                            <td className="text-center"><button className="btn">Ins</button></td>
-                            <td className="text-center"><button className="btn">Ad</button></td>
+                            <td className="text-center">{user.status === "instructor" ? "instructor" : <button onClick={() => handleUserStatus(user._id, "instructor")} className="btn"><MdIntegrationInstructions size={30} /></button>}</td>
+                            <td className="text-center">{user.status === "admin" ? "admin" : <button onClick={() => handleUserStatus(user._id, "admin")} className="btn"><GrUserAdmin size={30} /></button>}</td>
                         </tr>)}
-
                     </tbody>
                 </table>
             </div>
