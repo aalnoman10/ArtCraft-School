@@ -3,6 +3,8 @@ import Main from "../Layout/Main";
 import Home from "../pages/Home/Home/Home";
 import Login from "../pages/Login/Login/Login";
 import Resister from "../pages/Login/Resister/Resister";
+import Error from "../Layout/Error";
+import Instructors from "../pages/Instructors/Instructors";
 
 const Router = createBrowserRouter([
     {
@@ -23,7 +25,7 @@ const Router = createBrowserRouter([
             },
             {
                 path: '/instructors',
-                element: <Home />
+                element: <Instructors />
             },
             {
                 path: '/classes',
@@ -35,6 +37,10 @@ const Router = createBrowserRouter([
             },
         ]
     },
+    {
+        path: "*",
+        element: <Error />
+    }
 ]);
 
 export default Router;

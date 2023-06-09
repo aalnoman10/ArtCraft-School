@@ -1,0 +1,20 @@
+[
+    {
+        "id": "1",
+        "name": "John Doe",
+        "email": "john.doe@example.com",
+        "image": "https://media.nngroup.com/media/people/photos/2022-portrait-page-3.jpg.600x600_q75_autocrop_crop-smart_upscale.jpg"
+    },
+    {
+        "id": "2",
+        "name": "Jane Smith",
+        "email": "jane.smith@example.com",
+        "image": "https://media.nngroup.com/media/people/photos/2022-portrait-page-3.jpg.600x600_q75_autocrop_crop-smart_upscale.jpg"
+    },
+    {
+        "id": "3",
+        "name": "Michael Johnson",
+        "email": "michael.johnson@example.com",
+        "image": "https://media.nngroup.com/media/people/photos/2022-portrait-page-3.jpg.600x600_q75_autocrop_crop-smart_upscale.jpg"
+    }
+]
