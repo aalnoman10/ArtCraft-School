@@ -1,20 +1,32 @@
 [
     {
-        "id": "1",
-        "name": "John Doe",
-        "email": "john.doe@example.com",
-        "image": "https://media.nngroup.com/media/people/photos/2022-portrait-page-3.jpg.600x600_q75_autocrop_crop-smart_upscale.jpg"
+        "_id": "1",
+        "className": "Mathematics",
+        "classImage": "https://media.nngroup.com/media/people/photos/2022-portrait-page-3.jpg.600x600_q75_autocrop_crop-smart_upscale.jpg",
+        "instructorName": "John Smith",
+        "instructorEmail": "johnsmith@example.com",
+        "seats": 30,
+        "price": 50.99,
+        "status": "pending"
     },
     {
-        "id": "2",
-        "name": "Jane Smith",
-        "email": "jane.smith@example.com",
-        "image": "https://media.nngroup.com/media/people/photos/2022-portrait-page-3.jpg.600x600_q75_autocrop_crop-smart_upscale.jpg"
+        "_id": "2",
+        "className": "English Literature",
+        "classImage": "https://media.nngroup.com/media/people/photos/2022-portrait-page-3.jpg.600x600_q75_autocrop_crop-smart_upscale.jpg",
+        "instructorName": "Sarah Johnson",
+        "instructorEmail": "sarahjohnson@example.com",
+        "seats": 25,
+        "price": 45.50,
+        "status": "pending"
     },
     {
-        "id": "3",
-        "name": "Michael Johnson",
-        "email": "michael.johnson@example.com",
-        "image": "https://media.nngroup.com/media/people/photos/2022-portrait-page-3.jpg.600x600_q75_autocrop_crop-smart_upscale.jpg"
+        "_id": "3",
+        "className": "History",
+        "classImage": "https://media.nngroup.com/media/people/photos/2022-portrait-page-3.jpg.600x600_q75_autocrop_crop-smart_upscale.jpg",
+        "instructorName": "Michael Brown",
+        "instructorEmail": "michaelbrown@example.com",
+        "seats": 20,
+        "price": 40.00,
+        "status": "pending"
     }
 ]

@@ -1,7 +1,7 @@
 import InstuctorCard from "./InstuctorCard";
 import { useQuery } from '@tanstack/react-query'
 
-const Instructors = () => {
+const Instructors = ({ heading, size }) => {
 
     const { data: instructors = [] } = useQuery({
         queryKey: ['instructors'],
@@ -13,9 +13,9 @@ const Instructors = () => {
 
     return (
         <div className="py-4 bg-slate-50">
-            <h3 className="text-center text-3xl font-bold py-3">All Instructor</h3>
-            <div className="grid md:grid-cols-3 gap-4 p-4 md:px-0">
-                {instructors.map(instructor => <InstuctorCard key={instructor._id} instructor={instructor} />)}
+            <h3 className="text-center text-3xl font-bold py-3">{heading ? heading : "All Instructor"}</h3>
+            <div className="grid md:grid-cols-3 gap-4 p-4">
+                {instructors.slice(0, size).map(instructor => <InstuctorCard key={instructor._id} instructor={instructor} />)}
             </div>
         </div>
     );

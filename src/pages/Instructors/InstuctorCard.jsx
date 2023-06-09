@@ -1,14 +1,14 @@
 
 const InstuctorCard = ({ instructor }) => {
 
-    const { image, name, email } = instructor
+    const { instructorName, classImage, instructorEmail } = instructor
 
     return (
         <div className="card shadow-md">
-            <figure><img src={image} alt="Shoes" /></figure>
+            <figure><img src={classImage} alt="Shoes" /></figure>
             <div className="card-body">
-                <h2 className="card-title font-bold">{name}</h2>
-                <p><strong>Email :</strong> {email}</p>
+                <h2 className="card-title font-bold">{instructorName}</h2>
+                <p><strong>Email :</strong> {instructorEmail}</p>
             </div>
         </div>
     );
