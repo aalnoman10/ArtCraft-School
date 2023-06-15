@@ -13,6 +13,7 @@ import AddItem from "../pages/Dashboard/Instructor/AddItem/AddItem";
 import ManageUsers from "../pages/Dashboard/Admin/ManageUsers/ManageUsers";
 import ManageClasses from "../pages/Dashboard/Admin/ManageClasses/ManageClasses";
 import AdminRoute from "./AdminRoute";
+import InstructorRoute from "./InstructorRoute";
 
 const Router = createBrowserRouter([
     {
@@ -61,11 +62,11 @@ const Router = createBrowserRouter([
                     // instructor
                     {
                         path: '/dashboard/instructor/add-a-class',
-                        element: <AddItem />
+                        element: <InstructorRoute><AddItem /></InstructorRoute>
                     },
                     {
                         path: '/dashboard/instructor/my-class',
-                        element: <MyClass />
+                        element: <InstructorRoute> <MyClass /></InstructorRoute>
                     },
                 ]
             },

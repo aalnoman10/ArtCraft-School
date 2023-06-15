@@ -3,12 +3,12 @@ import { AuthContext } from "../Provider/AuthProvider";
 import { Navigate } from "react-router-dom";
 import useCheckRole from "../hooks/useCheckRole";
 
-const AdminRoute = ({ children }) => {
+const InstructorRoute = ({ children }) => {
 
     const { user, userLoding } = useContext(AuthContext)
     const checkRole = useCheckRole()
 
-    if (user && checkRole.role === 'admin') {
+    if (user && checkRole.role === 'instructor') {
         return children
     }
     else if (userLoding) {
@@ -18,4 +18,4 @@ const AdminRoute = ({ children }) => {
     return <Navigate to='/' replace={true} />
 };
 
-export default AdminRoute;
+export default InstructorRoute;

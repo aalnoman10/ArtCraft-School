@@ -1,10 +1,8 @@
 import { Link, Outlet } from "react-router-dom";
+import useCheckRole from "../hooks/useCheckRole";
 
 const Dashboard = () => {
-
-    {/* TODO : userType hardcode */ }
-
-    const userType = 'admin'
+    const checkRole = useCheckRole()
 
     return (
         <div className="drawer lg:drawer-open">
@@ -23,13 +21,13 @@ const Dashboard = () => {
                     {/* Sidebar content here */}
                     <h3 className="text-center text-3xl font-semibold py-4">ArtCartf School</h3>
 
-                    {userType === 'admin' ?
+                    {checkRole.role === 'admin' ?
                         <>
                             <li><Link to='/dashboard/admin/manage-classes'>Manage Classes</Link></li>
                             <li><Link to='/dashboard/admin/manage-users'>Manage Users</Link></li>
                         </>
                         :
-                        userType === 'instructor' ?
+                        checkRole.role === 'instructor' ?
                             <>
                                 <li><Link to='/dashboard/instructor/add-a-class'>Add a Class</Link></li>
                                 <li><Link to='/dashboard/instructor/my-class'>My Class</Link></li>
