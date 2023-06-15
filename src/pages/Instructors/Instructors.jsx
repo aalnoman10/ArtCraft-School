@@ -6,7 +6,7 @@ const Instructors = ({ heading, size }) => {
     const { data: instructors = [] } = useQuery({
         queryKey: ['instructors'],
         queryFn: () =>
-            fetch('/instructors.json').then(
+            fetch('http://localhost:5000/users?instructors=true').then(
                 (res) => res.json()
             ),
     })

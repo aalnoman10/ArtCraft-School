@@ -6,7 +6,8 @@ const ClasseCard = ({ sigleclass }) => {
 
     const { user } = useContext(AuthContext)
     const location = useLocation()
-    const { image, name, instructor, seats, price } = sigleclass
+
+    const { classImage, className, instructorName, seats, price } = sigleclass
     const check = !seats
 
     const handleSelect = () => {
@@ -24,10 +25,10 @@ const ClasseCard = ({ sigleclass }) => {
 
     return (
         <div className={`card shadow-md ${seats === 0 && "bg-red-400"}`}>
-            <figure><img src={image} alt="Shoes" /></figure>
+            <figure><img src={classImage} alt="Shoes" /></figure>
             <div className="card-body">
-                <h2 className="card-title font-bold">{name}</h2>
-                <p><strong>Instructor :</strong> {instructor}</p>
+                <h2 className="card-title font-bold">{className}</h2>
+                <p><strong>Instructor :</strong> {instructorName}</p>
                 <p><strong>Price :</strong> {price}</p>
                 <p><strong>Seats :</strong> {seats}</p>
                 <button onClick={handleSelect} className={`btn btn-primary normal-case w-full`} disabled={check && true}>Select</button>

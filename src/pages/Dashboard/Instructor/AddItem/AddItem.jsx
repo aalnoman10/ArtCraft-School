@@ -16,14 +16,26 @@ const AddItem = () => {
         const seats = form.seats.value
         const price = form.price.value
 
-        const info = {
+        const newClass = {
             className, classImage, instructorName, instructorEmail, seats, price, status: "pending"
         }
 
-        console.log(info);
-
-        {/* TODO : uncomplate */ }
-
+        fetch("http://localhost:5000/classes", {
+            method: "POST",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify(newClass)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.insertedId) {
+                    alert("Class update successfull")
+                }
+            })
+            .catch((err) => {
+                alert("Opps is not update : ", err)
+            });
     }
 
     return (
