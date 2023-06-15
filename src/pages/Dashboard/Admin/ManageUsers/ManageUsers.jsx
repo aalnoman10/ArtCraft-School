@@ -12,8 +12,8 @@ const ManageUsers = () => {
             ),
     })
 
-    const handleUserStatus = (_id, status) => {
-        const makeSure = confirm(`are you sure this user will be ${status}`)
+    const handleUserrole = (_id, role) => {
+        const makeSure = confirm(`are you sure this user will be ${role}`)
 
         if (makeSure) {
             fetch(`http://localhost:5000/users/${_id}`, {
@@ -21,15 +21,15 @@ const ManageUsers = () => {
                 headers: {
                     "content-type": "application/json"
                 },
-                body: JSON.stringify({ status })
+                body: JSON.stringify({ role })
             })
                 .then(res => res.json())
                 .then(data => {
                     if (data.modifiedCount > 0) {
-                        alert(`user has ${status} successfull`)
+                        alert(`user has ${role} successfull`)
                         refetch()
                     } else {
-                        alert("user status is not update")
+                        alert("user role is not update")
                     }
                 })
         }
@@ -57,8 +57,8 @@ const ManageUsers = () => {
                             <td>{index + 1}</td>
                             <td>{user.name}</td>
                             <td>{user.email}</td>
-                            <td className="text-center">{user.status === "instructor" ? "instructor" : <button onClick={() => handleUserStatus(user._id, "instructor")} className="btn"><MdIntegrationInstructions size={30} /></button>}</td>
-                            <td className="text-center">{user.status === "admin" ? "admin" : <button onClick={() => handleUserStatus(user._id, "admin")} className="btn"><GrUserAdmin size={30} /></button>}</td>
+                            <td className="text-center">{user.role === "instructor" ? "instructor" : <button onClick={() => handleUserrole(user._id, "instructor")} className="btn"><MdIntegrationInstructions size={30} /></button>}</td>
+                            <td className="text-center">{user.role === "admin" ? "admin" : <button onClick={() => handleUserrole(user._id, "admin")} className="btn"><GrUserAdmin size={30} /></button>}</td>
                         </tr>)}
                     </tbody>
                 </table>

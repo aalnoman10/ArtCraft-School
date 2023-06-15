@@ -13,7 +13,8 @@ const GoogleLogin = () => {
                 // crete user
                 const newUser = {
                     name: res.user.displayName,
-                    email: res.user.email
+                    email: res.user.email,
+                    image: res.user.photoURL
                 }
 
                 fetch("http://localhost:5000/users", {

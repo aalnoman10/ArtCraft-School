@@ -12,6 +12,7 @@ import MyClass from "../pages/Dashboard/Instructor/MyClass/MyClass";
 import AddItem from "../pages/Dashboard/Instructor/AddItem/AddItem";
 import ManageUsers from "../pages/Dashboard/Admin/ManageUsers/ManageUsers";
 import ManageClasses from "../pages/Dashboard/Admin/ManageClasses/ManageClasses";
+import AdminRoute from "./AdminRoute";
 
 const Router = createBrowserRouter([
     {
@@ -38,35 +39,35 @@ const Router = createBrowserRouter([
                 path: '/classes',
                 element: <Classes />
             },
-        ]
-    },
-    {
-        path: '/dashboard',
-        element: <PrivateRoute><Dashboard /></PrivateRoute>,
-        children: [
             {
                 path: '/dashboard',
-                element: <Home />
-            },
+                element: <PrivateRoute><Dashboard /></PrivateRoute>,
+                children: [
+                    {
+                        path: '/dashboard',
+                        element: <Home />
+                    },
 
-            // instructor
-            {
-                path: '/dashboard/admin/manage-users',
-                element: <ManageUsers />
-            },
-            {
-                path: '/dashboard/admin/manage-classes',
-                element: <ManageClasses />
-            },
+                    // admin
+                    {
+                        path: '/dashboard/admin/manage-users',
+                        element: <AdminRoute><ManageUsers /></AdminRoute>
+                    },
+                    {
+                        path: '/dashboard/admin/manage-classes',
+                        element: <AdminRoute><ManageClasses /></AdminRoute>
+                    },
 
-            // instructor
-            {
-                path: '/dashboard/instructor/add-a-class',
-                element: <AddItem />
-            },
-            {
-                path: '/dashboard/instructor/my-class',
-                element: <MyClass />
+                    // instructor
+                    {
+                        path: '/dashboard/instructor/add-a-class',
+                        element: <AddItem />
+                    },
+                    {
+                        path: '/dashboard/instructor/my-class',
+                        element: <MyClass />
+                    },
+                ]
             },
         ]
     },
