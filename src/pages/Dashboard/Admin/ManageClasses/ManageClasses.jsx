@@ -2,13 +2,30 @@ import { useQuery } from "@tanstack/react-query";
 
 const ManageClasses = () => {
 
-    const { data: classes = [] } = useQuery({
+    const { refetch, data: classes = [] } = useQuery({
         queryKey: ['classes'],
         queryFn: () =>
             fetch("http://localhost:5000/classes").then(
                 (res) => res.json()
             ),
     })
+
+    const handleUpdateStatus = (id, status) => {
+        fetch(`http://localhost:5000/classes/${id}`, {
+            method: "PUT",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify({ status })
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.modifiedCount > 0) {
+                    refetch()
+                    alert(`This class status Updated: ${status}`)
+                }
+            })
+    }
 
     return (
         <div>
@@ -46,15 +63,15 @@ const ManageClasses = () => {
                             <td>{singleClass.status}</td>
                             <td className="grid place-items-center">
                                 <div className="space-y-1 w-[91px]">
-                                    <button className="btn btn-primary normal-case w-[91px]">Approve</button>
-                                    <button className="btn btn-error normal-case w-[91px]">Deny</button>
+                                    <button onClick={() => handleUpdateStatus(singleClass._id, 'approve')} disabled={singleClass.status !== "pending"} className="btn btn-primary normal-case w-[91px]">Approve</button>
+                                    <button onClick={() => handleUpdateStatus(singleClass._id, 'dany')} disabled={singleClass.status !== "pending"} className="btn btn-error normal-case w-[91px]">Deny</button>
                                     <button className="btn btn-primary normal-case w-[91px]">feedback</button>
                                 </div>
                             </td>
                         </tr>)}
                     </tbody>
                 </table>
-            </div>
+            </div >
         </div >
     );
 };
