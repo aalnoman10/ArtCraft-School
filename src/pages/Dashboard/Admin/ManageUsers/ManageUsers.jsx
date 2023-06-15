@@ -37,7 +37,6 @@ const ManageUsers = () => {
 
     return (
         <div>
-            {/* TODO : uncomplate */}
             <h3 className="text-3xl font-semibold text-center mb-4">Manage Users</h3>
             <div className="overflow-x-auto py-5">
                 <table className="table bg-white rounded-2xl">
