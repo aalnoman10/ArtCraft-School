@@ -5,7 +5,7 @@ import { AuthContext } from "../Provider/AuthProvider";
 const useCheckRole = () => {
     const { user } = useContext(AuthContext)
 
-    const { data: checkRole = {} } = useQuery({
+    const { isLoading, data: checkRole = {} } = useQuery({
         queryKey: ['role'],
         queryFn: () =>
             fetch(`http://localhost:5000/users?email=${user?.email}`).then(
@@ -13,7 +13,7 @@ const useCheckRole = () => {
             ),
     })
 
-    return checkRole
+    return [isLoading, checkRole]
 };
 
 export default useCheckRole;

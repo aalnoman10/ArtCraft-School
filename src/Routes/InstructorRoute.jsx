@@ -6,12 +6,12 @@ import useCheckRole from "../hooks/useCheckRole";
 const InstructorRoute = ({ children }) => {
 
     const { user, userLoding } = useContext(AuthContext)
-    const checkRole = useCheckRole()
+    const [isLoading, checkRole] = useCheckRole()
 
     if (user && checkRole.role === 'instructor') {
         return children
     }
-    else if (userLoding) {
+    else if (userLoding || isLoading) {
         return <h1>Loding ...</h1>
     }
 
