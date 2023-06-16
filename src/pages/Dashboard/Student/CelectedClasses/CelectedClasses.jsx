@@ -7,13 +7,30 @@ import { MdPayment } from 'react-icons/md';
 const MyClass = () => {
     const { user } = useContext(AuthContext)
 
-    const { isLoading, data: selected = [] } = useQuery({
+    const { refetch, isLoading, data: selected = [] } = useQuery({
         queryKey: ['selected', user?.email],
         queryFn: () =>
             fetch(`http://localhost:5000/selected?emaill=${user?.email}`).then(
                 (res) => res.json()
             ),
     })
+
+    const handleDeleteItem = (_id) => {
+        const sureConfim = confirm("Are you sure delete this class")
+
+        if (sureConfim) {
+            fetch(`http://localhost:5000/selected/${_id}`, {
+                method: "DELETE"
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.deletedCount > 0) {
+                        alert("class delete successfull")
+                    }
+                    refetch()
+                })
+        }
+    }
 
     if (isLoading) {
         return <div className="grid place-items-center h-[80vh]">
@@ -46,8 +63,8 @@ const MyClass = () => {
                                 </div>
                             </td>
                             <td className="text-right">$ {selectedItem.price}</td>
-                            <td className="text-center"><button className="btn btn-primary text-white"><MdPayment size={30} /></button></td>
-                            <td className="text-center"><button className="btn btn-error text-white"><BsFillTrash3Fill size={30} /></button></td>
+                            <td className="text-center"><button className="btn btn-primary text-white"><MdPayment size={20} /></button></td>
+                            <td className="text-center"><button onClick={() => handleDeleteItem(selectedItem._id)} className="btn btn-error text-white"><BsFillTrash3Fill size={20} /></button></td>
                         </tr>)}
                     </tbody>
                 </table>
