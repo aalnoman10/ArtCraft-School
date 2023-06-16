@@ -67,7 +67,7 @@ const ManageClasses = () => {
                                     <button onClick={() => handleUpdateStatus(singleClass._id, 'approve')} disabled={singleClass.status !== "pending"} className="btn btn-primary normal-case w-[91px]">Approve</button>
                                     <button onClick={() => handleUpdateStatus(singleClass._id, 'dany')} disabled={singleClass.status !== "pending"} className="btn btn-error normal-case w-[91px]">Deny</button>
                                     {/* TODO : link external */}
-                                    <Link to='/dashboard/admin/feedback' className="btn btn-primary normal-case w-[91px]">feedback</Link>
+                                    <Link to={`/dashboard/admin/feedback/${singleClass._id}`} className="btn btn-primary normal-case w-[91px]">feedback</Link>
                                 </div>
                             </td>
                         </tr>)}

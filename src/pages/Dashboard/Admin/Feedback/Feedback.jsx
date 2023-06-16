@@ -1,34 +1,53 @@
-{/* TODO : link external */ }
+import { useParams } from "react-router-dom";
+import useSingleLoad from "../../../../hooks/useSingleLoad";
 
 const Feedback = () => {
+    const id = useParams().id
+    const [isLoading, classItem] = useSingleLoad({ id })
+
+    const handleFeedback = (e) => {
+        e.preventDefault()
+
+        const feedback = e.target.feedback.value
+        const status = classItem.status
+
+        const updateFeedback = {
+            feedback,
+            status
+        }
+
+        fetch(`http://localhost:5000/classes/${id}`, {
+            method: "PUT",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify(updateFeedback)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.matchedCount > 0) {
+                    alert("feedback send successfull")
+                }
+            })
+    }
+
+    if (isLoading) {
+        return <div className="grid place-items-center h-[80vh]">
+            <p className="text-3xl">Loading...</p>
+        </div>
+    }
+
     return (
         <div>
             <h3 className="text-3xl font-semibold text-center mb-4">Send a Feedback</h3>
-
-            <form>
-                <div className="md:flex gap-4">
-                    {/* name */}
-                    <div className="form-control w-full">
-                        <label className="label">
-                            <span>Class Name*</span>
-                        </label>
-                        <input type="text" name="className" placeholder="Class Name" className="input input-bordered w-full" required />
-                    </div>
-                    {/* img */}
-                    <div className="form-control w-full">
-                        <label className="label">
-                            <span>instructor Email*</span>
-                        </label>
-                        <input type="email" name="email" placeholder="instructor email" className="input input-bordered w-full" required />
-                    </div>
-                </div>
+            <form onSubmit={handleFeedback}>
                 <div className="md:flex gap-4">
                     {/* textaria*/}
                     <div className="form-control w-full">
                         <label className="label">
-                            <span>Class Name*</span>
+                            <span>feedback Massage *</span>
                         </label>
-                        <textarea type="text" name="text" placeholder="Write any Massage.." rows={10} className="p-4 input-bordered rounded-xl border w-full" required />
+                        <textarea type="text" name="feedback" placeholder="Write any Massage.." rows={10} className="p-4 input-bordered rounded-xl border w-full" defaultValue={classItem?.feedback} required />
                     </div>
                 </div>
                 <div className="md:flex gap-4">
@@ -37,7 +56,6 @@ const Feedback = () => {
                     </div>
                 </div>
             </form>
-
         </div>
     );
 };

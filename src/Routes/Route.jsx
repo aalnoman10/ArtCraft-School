@@ -16,7 +16,6 @@ import AdminRoute from "./AdminRoute";
 import InstructorRoute from "./InstructorRoute";
 import Feedback from "../pages/Dashboard/Admin/Feedback/feedback";
 import UpdateItem from "../pages/Dashboard/Instructor/UpdateItem/UpdateItem";
-import ShowFeedback from "../pages/Dashboard/Instructor/ShowFeedback/ShowFeedback";
 
 const Router = createBrowserRouter([
     {
@@ -62,7 +61,7 @@ const Router = createBrowserRouter([
                         element: <AdminRoute><ManageClasses /></AdminRoute>
                     },
                     {
-                        path: '/dashboard/admin/feedback',
+                        path: '/dashboard/admin/feedback/:id',
                         element: <AdminRoute><Feedback /></AdminRoute>
                     },
 
@@ -78,10 +77,6 @@ const Router = createBrowserRouter([
                     {
                         path: '/dashboard/instructor/my-class/:id',
                         element: <InstructorRoute> <UpdateItem /> </InstructorRoute>
-                    },
-                    {
-                        path: '/dashboard/instructor/my-class/:id',
-                        element: <InstructorRoute> <ShowFeedback /> </InstructorRoute>
                     },
                 ]
             },
