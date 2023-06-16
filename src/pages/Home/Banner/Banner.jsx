@@ -3,7 +3,10 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Autoplay, Pagination, Navigation } from "swiper";
-
+import banner1 from '../../../assets/banner-1.png'
+import banner2 from '../../../assets/banner-2.png'
+import banner3 from '../../../assets/banner-3.png'
+import Slider from "./slider";
 
 const Banner = () => {
     return (
@@ -21,9 +24,15 @@ const Banner = () => {
             modules={[Autoplay, Pagination, Navigation]}
             className="mySwiper"
         >
-            <SwiperSlide>Slide 1</SwiperSlide>
-            <SwiperSlide>Slide 2</SwiperSlide>
-            <SwiperSlide>Slide 3</SwiperSlide>
+            <SwiperSlide>
+                <Slider img={banner1} />
+            </SwiperSlide>
+            <SwiperSlide>
+                <Slider img={banner2} />
+            </SwiperSlide>
+            <SwiperSlide>
+                <Slider img={banner3} />
+            </SwiperSlide>
         </Swiper>
     );
 };
