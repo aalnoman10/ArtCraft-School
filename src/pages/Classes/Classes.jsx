@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import ClasseCard from "./classeCard";
+import ClasseCard from "./ClasseCard";
 
 const Classes = ({ heading, size }) => {
 

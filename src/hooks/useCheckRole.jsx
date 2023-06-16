@@ -6,9 +6,9 @@ const useCheckRole = () => {
     const { user } = useContext(AuthContext)
 
     const { isLoading, data: checkRole = {} } = useQuery({
-        queryKey: ['role'],
-        queryFn: () =>
-            fetch(`http://localhost:5000/users?email=${user?.email}`).then(
+        queryKey: ['role', user?.email],
+        queryFn: async () =>
+            await fetch(`http://localhost:5000/users?email=${user?.email}`).then(
                 (res) => res.json()
             ),
     })
@@ -17,5 +17,3 @@ const useCheckRole = () => {
 };
 
 export default useCheckRole;
-
-// /search?q
