@@ -11,7 +11,7 @@ const MyClass = () => {
     const { refetch, isLoading, data: selected = [] } = useQuery({
         queryKey: ['selected', user?.email],
         queryFn: () =>
-            fetch(`http://localhost:5000/selected?emaill=${user?.email}`).then(
+            fetch(`https://b7a12-summer-camp-server-side-aalnoman10.vercel.app/selected?emaill=${user?.email}`).then(
                 (res) => res.json()
             ),
     })
@@ -20,7 +20,7 @@ const MyClass = () => {
         const sureConfim = confirm("Are you sure delete this class")
 
         if (sureConfim) {
-            fetch(`http://localhost:5000/selected/${_id}`, {
+            fetch(`https://b7a12-summer-camp-server-side-aalnoman10.vercel.app/selected/${_id}`, {
                 method: "DELETE"
             })
                 .then(res => res.json())

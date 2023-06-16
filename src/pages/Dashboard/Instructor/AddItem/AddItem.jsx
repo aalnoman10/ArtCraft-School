@@ -20,7 +20,7 @@ const AddItem = () => {
             className, classImage, instructorName, instructorEmail, seats, price, status: "pending"
         }
 
-        fetch("http://localhost:5000/classes", {
+        fetch("https://b7a12-summer-camp-server-side-aalnoman10.vercel.app/classes", {
             method: "POST",
             headers: {
                 "content-type": "application/json"

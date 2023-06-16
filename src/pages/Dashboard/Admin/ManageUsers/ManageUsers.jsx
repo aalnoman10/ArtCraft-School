@@ -7,7 +7,7 @@ const ManageUsers = () => {
     const { refetch, data: users = [] } = useQuery({
         queryKey: ['users'],
         queryFn: async () =>
-            await fetch('http://localhost:5000/users').then(
+            await fetch('https://b7a12-summer-camp-server-side-aalnoman10.vercel.app/users').then(
                 (res) => res.json()
             ),
     })
@@ -16,7 +16,7 @@ const ManageUsers = () => {
         const makeSure = confirm(`are you sure this user will be ${role}`)
 
         if (makeSure) {
-            fetch(`http://localhost:5000/users/${_id}`, {
+            fetch(`https://b7a12-summer-camp-server-side-aalnoman10.vercel.app/users/${_id}`, {
                 method: "PATCH",
                 headers: {
                     "content-type": "application/json"

@@ -6,7 +6,7 @@ const Instructors = ({ heading, size }) => {
     const { data: instructors = [] } = useQuery({
         queryKey: ['instructors'],
         queryFn: () =>
-            fetch('http://localhost:5000/users?instructors=true').then(
+            fetch('https://b7a12-summer-camp-server-side-aalnoman10.vercel.app/users?instructors=true').then(
                 (res) => res.json()
             ),
     })

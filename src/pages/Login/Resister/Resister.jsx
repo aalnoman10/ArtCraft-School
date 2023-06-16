@@ -30,7 +30,7 @@ const Resister = () => {
                             image: data.photo
                         }
 
-                        fetch("http://localhost:5000/users", {
+                        fetch("https://b7a12-summer-camp-server-side-aalnoman10.vercel.app/users", {
                             method: "POST",
                             headers: {
                                 "content-type": "application/json"

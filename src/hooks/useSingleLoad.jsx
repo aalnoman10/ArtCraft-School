@@ -5,7 +5,7 @@ const useSingleLoad = ({ id }) => {
     const { isLoading, data: classItem = '' } = useQuery({
         queryKey: ['classItem', id],
         queryFn: () =>
-            fetch(`http://localhost:5000/classes/${id}`).then(
+            fetch(`https://b7a12-summer-camp-server-side-aalnoman10.vercel.app/classes/${id}`).then(
                 (res) => res.json()
             ),
     })

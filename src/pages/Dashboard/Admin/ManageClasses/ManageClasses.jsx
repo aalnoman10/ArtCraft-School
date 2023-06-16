@@ -6,13 +6,13 @@ const ManageClasses = () => {
     const { refetch, data: classes = [] } = useQuery({
         queryKey: ['classes'],
         queryFn: () =>
-            fetch("http://localhost:5000/classes").then(
+            fetch("https://b7a12-summer-camp-server-side-aalnoman10.vercel.app/classes").then(
                 (res) => res.json()
             ),
     })
 
     const handleUpdateStatus = (id, status) => {
-        fetch(`http://localhost:5000/classes/${id}`, {
+        fetch(`https://b7a12-summer-camp-server-side-aalnoman10.vercel.app/classes/${id}`, {
             method: "PUT",
             headers: {
                 "content-type": "application/json"

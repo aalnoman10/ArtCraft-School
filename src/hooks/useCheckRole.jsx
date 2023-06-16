@@ -8,7 +8,7 @@ const useCheckRole = () => {
     const { isLoading, data: checkRole = {} } = useQuery({
         queryKey: ['role', user?.email],
         queryFn: async () =>
-            await fetch(`http://localhost:5000/users?email=${user?.email}`).then(
+            await fetch(`https://b7a12-summer-camp-server-side-aalnoman10.vercel.app/users?email=${user?.email}`).then(
                 (res) => res.json()
             ),
     })

@@ -6,7 +6,7 @@ const Classes = ({ heading, size }) => {
     const { data: classes = [] } = useQuery({
         queryKey: ['classes'],
         queryFn: () =>
-            fetch("http://localhost:5000/classes").then(
+            fetch("https://b7a12-summer-camp-server-side-aalnoman10.vercel.app/classes").then(
                 (res) => res.json()
             ),
     })

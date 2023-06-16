@@ -16,7 +16,7 @@ const Feedback = () => {
             status
         }
 
-        fetch(`http://localhost:5000/classes/${id}`, {
+        fetch(`https://b7a12-summer-camp-server-side-aalnoman10.vercel.app/classes/${id}`, {
             method: "PUT",
             headers: {
                 "content-type": "application/json"

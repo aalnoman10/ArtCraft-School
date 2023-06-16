@@ -29,7 +29,7 @@ const ClasseCard = ({ sigleclass }) => {
 
             }
 
-            fetch("http://localhost:5000/selected", {
+            fetch("https://b7a12-summer-camp-server-side-aalnoman10.vercel.app/selected", {
                 method: "POST",
                 headers: {
                     "content-type": "application/json"

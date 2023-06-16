@@ -10,7 +10,7 @@ const MyClass = () => {
     const { isLoading, data: classes = {} } = useQuery({
         queryKey: ['role', user?.email],
         queryFn: () =>
-            fetch(`http://localhost:5000/classes?instructorEmail=${user?.email}`).then(
+            fetch(`https://b7a12-summer-camp-server-side-aalnoman10.vercel.app/classes?instructorEmail=${user?.email}`).then(
                 (res) => res.json()
             ),
     })
