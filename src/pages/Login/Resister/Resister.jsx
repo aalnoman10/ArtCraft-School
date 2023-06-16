@@ -1,13 +1,13 @@
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import GoogleLogin from "../../Shared/Social/GoogleLogin";
 import { useContext } from "react";
 import { AuthContext } from "../../../Provider/AuthProvider";
 
 const Resister = () => {
     const { createUser, setUser, updateUserProfile } = useContext(AuthContext)
-
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const navigate = useNavigate()
 
     const onSubmit = data => {
         if (data.password !== data.confrimPassword) {
@@ -18,7 +18,6 @@ const Resister = () => {
             .then(res => {
                 console.log(res.user);
                 setUser(res.user)
-
 
                 // update profile
                 updateUserProfile(res.user, data.name, data.photo)
@@ -39,8 +38,8 @@ const Resister = () => {
                             body: JSON.stringify(newUser)
                         })
                             .then(res => res.json())
-                            .then(data => {
-                                console.log(data);
+                            .then(() => {
+                                navigate("/")
                             })
                     })
                     .catch((err) => {
@@ -91,7 +90,7 @@ const Resister = () => {
                             <span className="label-text">Password*</span>
                         </label>
                         <input type="password" placeholder="your password"
-                            {...register("password", { minLength: 6, maxLength: 15, required: true })}
+                            {...register("password", { minLength: 6, maxLength: 15, pattern: /(?=.*[A-Z])(?=.*[~`!@#$%^&*])/, required: true })}
                             name="password" className="input input-bordered w-full" />
                         {errors.password?.type === "required" &&
                             <label className="label">
@@ -108,6 +107,11 @@ const Resister = () => {
                                 <span className="label-text-alt text-red-700">Password is less than 15 characters</span>
                             </label>
                         }
+                        {errors.password?.type === "pattern" &&
+                            <label className="label">
+                                <span className="label-text-alt text-red-700">dont have a capital letter and special character</span>
+                            </label>
+                        }
                     </div>
                     {/* conframe password */}
                     <div className="form-control w-full ">
@@ -115,7 +119,7 @@ const Resister = () => {
                             <span className="label-text">Confrim Password*</span>
                         </label>
                         <input type="password" placeholder="your Confrim password"
-                            {...register("confrimPassword", { minLength: 6, maxLength: 15, required: true })}
+                            {...register("confrimPassword", { minLength: 6, maxLength: 15, pattern: /(?=.*[A-Z])(?=.*[~`!@#$%^&*])/, required: true })}
                             name="confrimPassword" className="input input-bordered w-full" />
                         {errors.confrimPassword?.type === "required" &&
                             <label className="label">
@@ -130,6 +134,11 @@ const Resister = () => {
                         {errors.confrimPassword?.type === "maxLength" &&
                             <label className="label">
                                 <span className="label-text-alt text-red-700">Confrim Password is less than 15 characters</span>
+                            </label>
+                        }
+                        {errors.confrimPassword?.type === "pattern" &&
+                            <label className="label">
+                                <span className="label-text-alt text-red-700">dont have a capital letter and special character</span>
                             </label>
                         }
                     </div>

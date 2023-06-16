@@ -1,9 +1,12 @@
 import { useContext } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
 import { AuthContext } from '../../../Provider/AuthProvider';
 
 const GoogleLogin = () => {
     const { googleLogin, setUser } = useContext(AuthContext);
+    const navigate = useNavigate()
+    const location = useLocation()
 
     const handleLoogleLogin = () => {
         googleLogin()
@@ -28,6 +31,7 @@ const GoogleLogin = () => {
                     .then(data => {
                         console.log(data);
                     })
+                navigate('/login', { state: { from: location } })
 
             }).catch((err) => {
                 alert("Opps ", err.message);

@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../../../../Provider/AuthProvider";
 import { BsFillTrash3Fill } from 'react-icons/bs';
 import { MdPayment } from 'react-icons/md';
@@ -63,7 +64,7 @@ const MyClass = () => {
                                 </div>
                             </td>
                             <td className="text-right">$ {selectedItem.price}</td>
-                            <td className="text-center"><button className="btn btn-primary text-white"><MdPayment size={20} /></button></td>
+                            <td className="text-center"><Link to={`/dashboard/payment/${selectedItem._id}`} className="btn btn-primary text-white"><MdPayment size={20} /></Link></td>
                             <td className="text-center"><button onClick={() => handleDeleteItem(selectedItem._id)} className="btn btn-error text-white"><BsFillTrash3Fill size={20} /></button></td>
                         </tr>)}
                     </tbody>

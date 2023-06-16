@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import GoogleLogin from "../../Shared/Social/GoogleLogin";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../../Provider/AuthProvider";
@@ -8,14 +8,18 @@ import { AuthContext } from "../../../Provider/AuthProvider";
 const Login = () => {
 
     const { login, setUser } = useContext(AuthContext)
-
     const [passwordHide, setPasswordHide] = useState(true)
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const navigate = useNavigate()
+    const location = useLocation()
+
+    const from = location.state?.from?.pathname || '/'
 
     const onSubmit = data => {
         login(data.email, data.password)
             .then(res => {
                 console.log(res.user);
+                navigate(from)
                 setUser(res.user)
             }).catch((err) => {
                 alert("Opps ", err.message)
@@ -26,7 +30,6 @@ const Login = () => {
         <div className="grid place-items-center bg-slate-300 min-h-[100vh]">
             <div className="bg-white rounded-2xl shadow-xl p-4 w-4/5 md:w-2/4">
                 <form onSubmit={handleSubmit(onSubmit)}>
-
                     {/* email */}
                     <div className="form-control w-full ">
                         <label className="label">
@@ -61,7 +64,6 @@ const Login = () => {
                             </label>
                         }
                     </div>
-
                     <div className="form-control w-full my-4">
                         <input type="submit" className="btn btn-primary" value="Sing in" />
                     </div>

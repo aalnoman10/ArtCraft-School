@@ -2,7 +2,7 @@ import { Link, Outlet } from "react-router-dom";
 import useCheckRole from "../hooks/useCheckRole";
 
 const Dashboard = () => {
-    const [,checkRole] = useCheckRole()
+    const [, checkRole] = useCheckRole()
 
     return (
         <div className="drawer lg:drawer-open">
@@ -36,7 +36,6 @@ const Dashboard = () => {
                             <>
                                 <li><Link to="/dashboard/selected-classes">My Selected Classes</Link></li>
                                 <li><Link to="/dashboard/enrolled-classes">My Enrolled Classes</Link></li>
-                                <li><Link to='/dashboard/payment'>Payment</Link></li>
                                 <li><Link to='/dashboard/payment-history'>Payment History</Link></li>
                             </>
                     }

@@ -1,12 +1,13 @@
 import { useContext } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
-import { Navigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import useCheckRole from "../../hooks/useCheckRole";
 
 const ClasseCard = ({ sigleclass }) => {
 
     const { user } = useContext(AuthContext)
     const location = useLocation()
+    const navigate = useNavigate()
     const [isLoading, checkRole] = useCheckRole()
     const { classImage, className, instructorName, seats, price, _id } = sigleclass
     const check = seats === "0" || checkRole.role === "admin" || checkRole.role === "instructor"
@@ -16,7 +17,7 @@ const ClasseCard = ({ sigleclass }) => {
         if (!user) {
             const sureConfirm = confirm("user to log in before selecting the course")
             if (sureConfirm) {
-                return <Navigate to='/login' state={{ from: location }} replace={true} ></Navigate>
+                return navigate('/login', { state: { from: location } })
             }
         } else {
             const select = {
