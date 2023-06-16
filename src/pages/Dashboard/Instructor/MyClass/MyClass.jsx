@@ -1,10 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../../../Provider/AuthProvider";
 import { Link } from "react-router-dom";
 
 const MyClass = () => {
     const { user } = useContext(AuthContext)
+    const [feedbackItem, setFeedbackItem] = useState('')
 
     const { isLoading, data: classes = {} } = useQuery({
         queryKey: ['role', user?.email],
@@ -14,10 +15,10 @@ const MyClass = () => {
             ),
     })
 
-    const handleUpdateStatus = () => { }
-
     if (isLoading) {
-        <h1>Loading...</h1>
+        return <div className="grid place-items-center h-[80vh]">
+            <p className="text-3xl">Loading...</p>
+        </div>
     }
     return (
         <div className="py-4 bg-slate-50">
@@ -48,7 +49,7 @@ const MyClass = () => {
                             <td>{singleClass.status}</td>
                             <td className="text-right">{singleClass.enroll ? singleClass.enroll : "0"}</td>
                             <td>
-                                <button onClick={() => handleUpdateStatus()} className="btn btn-error normal-case">Feedback</button>
+                                <span onClick={() => setFeedbackItem(singleClass)}><button className="btn" onClick={() => window.my_modal_1.showModal()}>Feedback</button></span>
                             </td>
                             <td>
                                 <Link to={`/dashboard/instructor/my-class/${singleClass._id}`} className="btn btn-error normal-case">Update</Link>
@@ -56,9 +57,22 @@ const MyClass = () => {
                         </tr>)}
                     </tbody>
                 </table>
-
             </div>
+
+            {/* Open the modal using ID.showModal() method */}
+            <dialog id="my_modal_1" className="modal">
+                <form method="dialog" className="modal-box">
+                    <h3 className="font-bold text-lg">Feedback of {feedbackItem.className}</h3>
+                    <p className="py-4">{feedbackItem.feedback ? feedbackItem.feedback : 'not a feedback'}</p>
+                    <div className="modal-action">
+                        {/* if there is a button in form, it will close the modal */}
+                        <button className="btn">Close</button>
+                    </div>
+                </form>
+            </dialog>
+
         </div>
+
     );
 };
 
