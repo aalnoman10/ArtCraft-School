@@ -16,6 +16,8 @@ import AdminRoute from "./AdminRoute";
 import InstructorRoute from "./InstructorRoute";
 import Feedback from "../pages/Dashboard/Admin/Feedback/feedback";
 import UpdateItem from "../pages/Dashboard/Instructor/UpdateItem/UpdateItem";
+import CelectedClasses from "../pages/Dashboard/Student/CelectedClasses/CelectedClasses";
+import EnrolledClasses from "../pages/Dashboard/Student/EnrolledClasses/EnrolledClasses";
 
 const Router = createBrowserRouter([
     {
@@ -77,6 +79,16 @@ const Router = createBrowserRouter([
                     {
                         path: '/dashboard/instructor/my-class/:id',
                         element: <InstructorRoute> <UpdateItem /> </InstructorRoute>
+                    },
+
+                    // user // student
+                    {
+                        path: '/dashboard/selected-classes',
+                        element: <PrivateRoute><CelectedClasses /></PrivateRoute>
+                    },
+                    {
+                        path: '/dashboard/enrolled-classes',
+                        element: <PrivateRoute><EnrolledClasses /></PrivateRoute>
                     },
                 ]
             },

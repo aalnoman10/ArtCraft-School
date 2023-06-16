@@ -1,0 +1,60 @@
+import { useQuery } from "@tanstack/react-query";
+import { useContext } from "react";
+import { AuthContext } from "../../../../Provider/AuthProvider";
+import { BsFillTrash3Fill } from 'react-icons/bs';
+import { MdPayment } from 'react-icons/md';
+
+const MyClass = () => {
+    const { user } = useContext(AuthContext)
+
+    const { isLoading, data: selected = [] } = useQuery({
+        queryKey: ['selected', user?.email],
+        queryFn: () =>
+            fetch(`http://localhost:5000/selected?emaill=${user?.email}`).then(
+                (res) => res.json()
+            ),
+    })
+
+    if (isLoading) {
+        return <div className="grid place-items-center h-[80vh]">
+            <p className="text-3xl">Loading...</p>
+        </div>
+    }
+    return (
+        <div className="py-4 bg-slate-50">
+            <h3 className="text-center text-3xl font-bold py-3">My All selected</h3>
+            <div className="grid md:grid-cols-3 gap-4 p-4">
+                <table className="table bg-white rounded-2xl min-w-[48vw] mx-auto">
+                    {/* head */}
+                    <thead className="bg-slate-300 rounded-2xl text-center">
+                        <tr className="rounded-2xl">
+                            <th className="font-bold">#</th>
+                            <th className="font-bold">Class</th>
+                            <th className="font-bold">Price</th>
+                            <th className="font-bold">Pay</th>
+                            <th className="font-bold">Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {/* row  */}
+                        {selected && selected.map((selectedItem, index) => <tr key={selectedItem._id}>
+                            <td>{index + 1}</td>
+                            <td>
+                                <div className="flex flex-col">
+                                    <img src={selectedItem.classImage} className="w-28" alt="" />
+                                    <h3 className="font-bold pt-2">{selectedItem.className}</h3>
+                                </div>
+                            </td>
+                            <td className="text-right">$ {selectedItem.price}</td>
+                            <td className="text-center"><button className="btn btn-primary text-white"><MdPayment size={30} /></button></td>
+                            <td className="text-center"><button className="btn btn-error text-white"><BsFillTrash3Fill size={30} /></button></td>
+                        </tr>)}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    );
+};
+
+export default MyClass;
