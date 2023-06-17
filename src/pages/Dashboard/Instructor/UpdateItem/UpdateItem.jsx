@@ -1,8 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
-import { useParams } from "react-router-dom";
+import { useParams,useNavigate } from "react-router-dom";
 
 const UpdateItem = () => {
     const id = useParams().id
+    const navigate = useNavigate()
 
     const { data: classItem = '' } = useQuery({
         queryKey: ['classItem', id],
@@ -38,6 +39,7 @@ const UpdateItem = () => {
             .then(data => {
                 if (data.modifiedCount > 0) {
                     alert("Class update successfull")
+                    navigate('/dashboard/instructor/my-class')
                 }
             })
             .catch((err) => {
@@ -47,7 +49,7 @@ const UpdateItem = () => {
 
     return (
         <div>
-            <h3 className="text-3xl font-semibold text-center mb-4">Add a Class</h3>
+            <h3 className="text-3xl font-semibold text-center mb-4">Update Class</h3>
             <form onSubmit={handleUpdateClass} className="mt-10" >
                 <div className="md:flex gap-4">
                     {/* name */}

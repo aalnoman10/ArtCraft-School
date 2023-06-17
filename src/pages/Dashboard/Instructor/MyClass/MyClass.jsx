@@ -8,7 +8,7 @@ const MyClass = () => {
     const [feedbackItem, setFeedbackItem] = useState('')
 
     const { isLoading, data: classes = {} } = useQuery({
-        queryKey: ['role', user?.email],
+        queryKey: ['classes', user?.email],
         queryFn: () =>
             fetch(`https://b7a12-summer-camp-server-side-aalnoman10.vercel.app/classes?instructorEmail=${user?.email}`).then(
                 (res) => res.json()
@@ -20,6 +20,7 @@ const MyClass = () => {
             <p className="text-3xl">Loading...</p>
         </div>
     }
+
     return (
         <div className="py-4 bg-slate-50">
             <h3 className="text-center text-3xl font-bold py-3">My All Classes</h3>
