@@ -1,10 +1,11 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../Provider/AuthProvider";
+import { Theme } from "../../../Provider/ThemeProvider";
 
 const NavBar = () => {
-
     const { user, logOut } = useContext(AuthContext);
+    const { handleTheme } = useContext(Theme)
 
     const handleLogOut = () => {
         logOut()
@@ -22,11 +23,14 @@ const NavBar = () => {
             <li><Link to="dashboard">Dashboard</Link></li>
             <li><Link onClick={handleLogOut}>LogOut</Link></li>
         </>}
+        <li className="flex items-center justify-center">
+            <input onClick={handleTheme} type="checkbox" className="toggle" />
+        </li>
     </>
 
     return (
-        <div className="navbar bg-black bg-opacity-20 text-white z-10 fixed top-0 max-w-screen-lg mx-auto">
-            <div className="navbar-start">
+        <div className="navbar justify-between bg-black bg-opacity-20 text-white z-10 fixed top-0 max-w-screen-lg mx-auto">
+            <div className="navbar-start w-2/5">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
@@ -42,7 +46,7 @@ const NavBar = () => {
                     {navLinkItems}
                 </ul>
             </div>
-            <div className="navbar-end md:w-fit md:pl-4">
+            <div className="navbar-end md:w-fit">
                 {user ?
                     <Link to={`my-profile`} ><img className="w-12 h-12 rounded-full" src={user?.photoURL} alt="" /></Link>
                     :

@@ -2,8 +2,10 @@ import { useContext } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { useNavigate, useLocation } from "react-router-dom";
 import useCheckRole from "../../hooks/useCheckRole";
+import { Theme } from "../../Provider/ThemeProvider";
 
 const ClasseCard = ({ sigleclass }) => {
+    const { themeDark } = useContext(Theme)
 
     const { user, userLoding } = useContext(AuthContext)
     const location = useLocation()
@@ -54,7 +56,7 @@ const ClasseCard = ({ sigleclass }) => {
     }
 
     return (
-        <div className={`card shadow-md ${seats === "0" && "bg-red-400"}`}>
+        <div className={`card shadow-md ${!themeDark && "bg-slate-800"} ${seats === "0" && "bg-red-400"}`}>
             <figure><img src={classImage} alt="Shoes" /></figure>
             <div className="card-body">
                 <h2 className="card-title font-bold">{className}</h2>

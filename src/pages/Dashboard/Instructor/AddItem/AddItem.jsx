@@ -2,7 +2,6 @@ import { useContext } from "react";
 import { AuthContext } from "../../../../Provider/AuthProvider";
 
 const AddItem = () => {
-
     const { user } = useContext(AuthContext)
 
     const handleAddClass = (e) => {
@@ -17,7 +16,7 @@ const AddItem = () => {
         const price = form.price.value
 
         const newClass = {
-            className, classImage, instructorName, instructorEmail, seats, price, status: "pending"
+            className, classImage, instructorName, instructorEmail, seats, price, status: "pending", enroll: "0"
         }
 
         fetch("https://b7a12-summer-camp-server-side-aalnoman10.vercel.app/classes", {

@@ -1,17 +1,10 @@
-import { useQuery } from "@tanstack/react-query";
-import { useParams,useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import useSingleLoad from "../../../../hooks/useSingleLoad";
 
 const UpdateItem = () => {
     const id = useParams().id
+    const [isLoading, classItem] = useSingleLoad({ id })
     const navigate = useNavigate()
-
-    const { data: classItem = '' } = useQuery({
-        queryKey: ['classItem', id],
-        queryFn: () =>
-            fetch(`https://b7a12-summer-camp-server-side-aalnoman10.vercel.app/classes/${id}`).then(
-                (res) => res.json()
-            ),
-    })
 
     const { className, classImage, instructorName, instructorEmail, seats, price } = classItem
 
@@ -47,6 +40,11 @@ const UpdateItem = () => {
             });
     }
 
+    if (isLoading) {
+        return <div className="grid place-items-center h-[80vh]">
+            <p className="text-3xl">Loading...</p>
+        </div>
+    }
     return (
         <div>
             <h3 className="text-3xl font-semibold text-center mb-4">Update Class</h3>
