@@ -11,7 +11,7 @@ const MyClass = () => {
     const { refetch, isLoading, data: selected = [] } = useQuery({
         queryKey: ['selected', user?.email],
         queryFn: () =>
-            fetch(`https://b7a12-summer-camp-server-side-aalnoman10.vercel.app/selected?emaill=${user?.email}`).then(
+            fetch(`https://b7a12-summer-camp-server-side-aalnoman10.vercel.app/selected?email=${user?.email}`).then(
                 (res) => res.json()
             ),
     })

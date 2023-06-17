@@ -40,7 +40,6 @@ const ClasseCard = ({ sigleclass }) => {
                 .then(data => {
                     if (data.insertedId) {
                         alert("item selected successfull")
-                        console.log(data);
                     }
                 })
         }
