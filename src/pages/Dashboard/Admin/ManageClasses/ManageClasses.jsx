@@ -1,9 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../../Provider/AuthProvider";
 
 const ManageClasses = () => {
+    const { userLoding } = useContext(AuthContext)
 
-    const { refetch, data: classes = [] } = useQuery({
+    const { isLoading, refetch, data: classes = [] } = useQuery({
         queryKey: ['classes'],
         queryFn: () =>
             fetch("https://b7a12-summer-camp-server-side-aalnoman10.vercel.app/classes").then(
@@ -26,6 +29,12 @@ const ManageClasses = () => {
                     alert(`This class status Updated: ${status}`)
                 }
             })
+    }
+
+    if (userLoding || isLoading) {
+        return <div className="grid place-items-center h-[80vh]">
+            <p className="text-3xl">Loading...</p>
+        </div>
     }
 
     return (

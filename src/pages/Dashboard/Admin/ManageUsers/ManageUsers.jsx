@@ -1,10 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import { MdIntegrationInstructions } from "react-icons/md";
 import { GrUserAdmin } from "react-icons/gr";
+import { AuthContext } from "../../../../Provider/AuthProvider";
+import { useContext } from "react";
 
 const ManageUsers = () => {
+    const { userLoding } = useContext(AuthContext)
 
-    const { refetch, data: users = [] } = useQuery({
+    const { isLoading, refetch, data: users = [] } = useQuery({
         queryKey: ['users'],
         queryFn: async () =>
             await fetch('https://b7a12-summer-camp-server-side-aalnoman10.vercel.app/users').then(
@@ -33,6 +36,12 @@ const ManageUsers = () => {
                     }
                 })
         }
+    }
+
+    if (userLoding || isLoading) {
+        return <div className="grid place-items-center h-[80vh]">
+            <p className="text-3xl">Loading...</p>
+        </div>
     }
 
     return (

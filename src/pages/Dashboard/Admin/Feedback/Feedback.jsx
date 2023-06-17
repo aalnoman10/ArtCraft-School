@@ -1,9 +1,12 @@
 import { useParams } from "react-router-dom";
 import useSingleLoad from "../../../../hooks/useSingleLoad";
+import { useContext } from "react";
+import { AuthContext } from "../../../../Provider/AuthProvider";
 
 const Feedback = () => {
     const id = useParams().id
     const [isLoading, classItem] = useSingleLoad({ id })
+    const { userLoding } = useContext(AuthContext)
 
     const handleFeedback = (e) => {
         e.preventDefault()
@@ -31,7 +34,7 @@ const Feedback = () => {
             })
     }
 
-    if (isLoading) {
+    if (userLoding || isLoading) {
         return <div className="grid place-items-center h-[80vh]">
             <p className="text-3xl">Loading...</p>
         </div>

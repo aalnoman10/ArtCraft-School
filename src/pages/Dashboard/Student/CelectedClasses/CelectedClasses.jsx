@@ -6,7 +6,7 @@ import { BsFillTrash3Fill } from 'react-icons/bs';
 import { MdPayment } from 'react-icons/md';
 
 const MyClass = () => {
-    const { user } = useContext(AuthContext)
+    const { user, userLoding } = useContext(AuthContext)
 
     const { refetch, isLoading, data: selected = [] } = useQuery({
         queryKey: ['selected', user?.email],
@@ -48,11 +48,12 @@ const MyClass = () => {
             })
     }
 
-    if (isLoading) {
+    if (userLoding || isLoading) {
         return <div className="grid place-items-center h-[80vh]">
             <p className="text-3xl">Loading...</p>
         </div>
     }
+    
     return (
         <div className="py-4 bg-slate-50">
             <h3 className="text-center text-3xl font-bold py-3">My All selected</h3>

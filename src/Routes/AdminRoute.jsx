@@ -12,7 +12,9 @@ const AdminRoute = ({ children }) => {
         return children
     }
     else if (userLoding || isLoading) {
-        return <h1>Loding ...</h1>
+        return <div className="grid place-items-center h-[80vh]">
+            <p className="text-3xl">Loading...</p>
+        </div>
     }
 
     return <Navigate to='/' replace={true} />

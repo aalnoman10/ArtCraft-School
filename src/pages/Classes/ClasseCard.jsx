@@ -5,7 +5,7 @@ import useCheckRole from "../../hooks/useCheckRole";
 
 const ClasseCard = ({ sigleclass }) => {
 
-    const { user } = useContext(AuthContext)
+    const { user, userLoding } = useContext(AuthContext)
     const location = useLocation()
     const navigate = useNavigate()
     const [isLoading, checkRole] = useCheckRole()
@@ -46,7 +46,7 @@ const ClasseCard = ({ sigleclass }) => {
     }
 
     if (user) {
-        if (isLoading) {
+        if (userLoding || isLoading) {
             return <div className="grid place-items-center h-[80vh]">
                 <p className="text-3xl">Loading...</p>
             </div>

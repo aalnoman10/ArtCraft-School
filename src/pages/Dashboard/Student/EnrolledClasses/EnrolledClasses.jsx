@@ -5,7 +5,7 @@ import { BsFillTrash3Fill } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
 const EnrolledClasses = () => {
-    const { user } = useContext(AuthContext)
+    const { user, userLoding } = useContext(AuthContext)
 
     const { refetch, isLoading, data: enrolled = [] } = useQuery({
         queryKey: ['enrolled', user?.email],
@@ -32,9 +32,7 @@ const EnrolledClasses = () => {
         }
     }
 
-    console.log(enrolled);
-
-    if (isLoading) {
+    if (userLoding || isLoading) {
         return <div className="grid place-items-center h-[80vh]">
             <p className="text-3xl">Loading...</p>
         </div>

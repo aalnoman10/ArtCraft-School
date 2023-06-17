@@ -4,7 +4,7 @@ import { AuthContext } from "../../../../Provider/AuthProvider";
 import { Link } from "react-router-dom";
 
 const MyClass = () => {
-    const { user } = useContext(AuthContext)
+    const { user, userLoding } = useContext(AuthContext)
     const [feedbackItem, setFeedbackItem] = useState('')
 
     const { isLoading, data: classes = {} } = useQuery({
@@ -15,7 +15,7 @@ const MyClass = () => {
             ),
     })
 
-    if (isLoading) {
+    if (userLoding || isLoading) {
         return <div className="grid place-items-center h-[80vh]">
             <p className="text-3xl">Loading...</p>
         </div>
