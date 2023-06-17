@@ -33,6 +33,21 @@ const MyClass = () => {
         }
     }
 
+    // 
+    const handlePayment = (_id) => {
+
+        fetch(`https://b7a12-summer-camp-server-side-aalnoman10.vercel.app/selected/${_id}`, {
+            method: "PATCH",
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.modifiedCount > 0) {
+                    refetch()
+                    alert(`Enrolled successfull`)
+                }
+            })
+    }
+
     if (isLoading) {
         return <div className="grid place-items-center h-[80vh]">
             <p className="text-3xl">Loading...</p>
@@ -64,7 +79,12 @@ const MyClass = () => {
                                 </div>
                             </td>
                             <td className="text-right">$ {selectedItem.price}</td>
-                            <td className="text-center"><Link to={`/dashboard/payment/${selectedItem._id}`} className="btn btn-primary text-white"><MdPayment size={20} /></Link></td>
+                            <td className="text-center">
+                                {/* <Link to={`/dashboard/payment/${selectedItem._id}`} className="btn btn-primary text-white"><MdPayment size={20} /></Link> */}
+                                {selectedItem.enroll ?
+                                    <p className="font-medium">{selectedItem.enroll}</p> :
+                                    <button onClick={() => handlePayment(selectedItem._id)} className="btn btn-primary text-white"><MdPayment size={20} /></button>}
+                            </td>
                             <td className="text-center"><button onClick={() => handleDeleteItem(selectedItem._id)} className="btn btn-error text-white"><BsFillTrash3Fill size={20} /></button></td>
                         </tr>)}
                     </tbody>
